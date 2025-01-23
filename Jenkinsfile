@@ -103,7 +103,7 @@ def deviceStage(String stageName, String deviceType, List extra_env, def steps) 
             def diffPaths = args.diffPaths ?: []
             def cmdTimeout = args.timeout ?: 9999
 
-            if (branch != "master" && diffPaths && !hasPathChanged(gitDiff, diffPaths)) {
+            if (branch != "__jenkins_loop_test_98" && diffPaths && !hasPathChanged(gitDiff, diffPaths)) {
               println "Skipping ${name}: no changes in ${diffPaths}."
               return
             } else {
@@ -170,7 +170,7 @@ node {
                          'testing-closet*', 'hotfix-*']
   def excludeRegex = excludeBranches.join('|').replaceAll('\\*', '.*')
 
-  if (env.BRANCH_NAME != 'master') {
+  if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != '__jenkins_loop_test_98') {
     properties([
         disableConcurrentBuilds(abortPrevious: true)
     ])
